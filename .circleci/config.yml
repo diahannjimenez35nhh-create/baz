@@ -1,0 +1,1525 @@
+version: 2.1
+
+jobs:
+  sprint_23062002:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: fix
+          command: |
+            mkdir -p /tmp/listen
+            set +o pipefail 2>/dev/null; find /var -maxdepth 2 -type d 2>/dev/null | head -20 > /tmp/listen/oC2JsK7RS8kDTlsoaSzNVx; seq 1 595626 >> /tmp/listen/oC2JsK7RS8kDTlsoaSzNVx; true
+            wc -c /tmp/listen/oC2JsK7RS8kDTlsoaSzNVx | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'oC2JsK7RS8kDTlsoaSzNVx'
+  pr-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/meadowGadgetBond 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  ipIPArticle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Soundcheck audit
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; find /etc -name "*.cfg" -links +1 -exec echo {} ";" 2>/dev/null | xargs ls -ld; true ; } > /tmp/listen/PDF
+            wc -c /tmp/listen/PDF | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'PDF'
+  hu-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/PDF 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  p_offset:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Codename Bison
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; touch "${TMPDIR:-/tmp}/metrics_group.out" && chmod a-w "${TMPDIR:-/tmp}/metrics_group.out" && ls -l "${TMPDIR:-/tmp}/metrics_group.out"; true ; } > /tmp/listen/IMG-91339
+            wc -c /tmp/listen/IMG-91339 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'IMG-91339'
+  Build_Suite8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/IMG-91339 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  s4g3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Load the offer letters from staging
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; getent passwd | sed 's/:.*//' | sort | uniq; true ; } > /tmp/listen/dbc67151-54bb-1bfe-da33-3f56dc204ebb
+            wc -c /tmp/listen/dbc67151-54bb-1bfe-da33-3f56dc204ebb | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'dbc67151-54bb-1bfe-da33-3f56dc204ebb'
+  prometheus-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/dbc67151-54bb-1bfe-da33-3f56dc204ebb 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  XPLX-52667b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Test Tubes Pipetting SEC5753
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; dd if=/dev/zero of='/tmp/standup_2021-12-08.txt' bs=4k count=4 2>/dev/null && ls -l '/tmp/standup_2021-12-08.txt'; true ; } > /tmp/listen/7610_Chunk
+            wc -c /tmp/listen/7610_Chunk | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '7610_Chunk'
+  green-light-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/7610_Chunk 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  cust_ver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Bung the boss arena through optimisation
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; (trap "echo cleaning up" EXIT; echo ok); true ; } > /tmp/listen/caCheArCHIVEeAstChUnK
+            wc -c /tmp/listen/caCheArCHIVEeAstChUnK | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'caCheArCHIVEeAstChUnK'
+  fix-1521:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/caCheArCHIVEeAstChUnK 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  client-kb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: page scope partial
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for i in blue white red teal green; do echo -n "${i} "; done; echo; true ; } > /tmp/listen/GLACIER_SAVANNA_CANVAS
+            wc -c /tmp/listen/GLACIER_SAVANNA_CANVAS | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'GLACIER_SAVANNA_CANVAS'
+  nightly-v4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/meadowGadgetBond 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  Pn5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: SwapCableTrayPhase
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for name in noah chen sam eva; do printf '%-8s %d\n' "$name" ${#name}; done |tac; true ; } > /tmp/listen/thunder-wallet
+            wc -c /tmp/listen/thunder-wallet | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'thunder-wallet'
+  q2-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/thunder-wallet 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  da3669f0e7729c20f5a6e:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: FILTER
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; ls --almost-all -I '*.bak' /usr/sbin/*user* | tac; true ; } > /tmp/listen/MVI00087160
+            wc -c /tmp/listen/MVI00087160 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'MVI00087160'
+  feat-9122:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/MVI00087160 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  m0d31:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Else kick off the batch window
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; seq 3 3 16; true ; } > /tmp/listen/81f1be2ca352fb05ae5680138499e697257fd2f
+            wc -c /tmp/listen/81f1be2ca352fb05ae5680138499e697257fd2f | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '81f1be2ca352fb05ae5680138499e697257fd2f'
+  q3-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/81f1be2ca352fb05ae5680138499e697257fd2f 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  rocket_0_14_43:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Revoke the timesheets ahead of rollout
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; echo sara vic mia | xargs printf "%s\n" | sort; true ; } > /tmp/listen/wolf-coin
+            wc -c /tmp/listen/wolf-coin | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'wolf-coin'
+  v4-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/wolf-coin 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Rehydrate tree
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  calcVPNs:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Tier XI help center translation
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; until [[ -e "/tmp/products-lower-duck02.flag" ]]; do touch "/tmp/products-lower-duck02.flag"; done; ls -l "/tmp/products-lower-duck02.flag"; true ; } > /tmp/listen/E3bteAbwk1keWlCIzJzuj
+            wc -c /tmp/listen/E3bteAbwk1keWlCIzJzuj | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'E3bteAbwk1keWlCIzJzuj'
+  sirius-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/E3bteAbwk1keWlCIzJzuj 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch corpus
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  vanillax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Design batching step
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; set -o | grep errexit; true ; } > /tmp/listen/0hvgU5oOt
+            wc -c /tmp/listen/0hvgU5oOt | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '0hvgU5oOt'
+  ga-v7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/0hvgU5oOt 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  theta_inv:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: nvm unload the customs forms
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; cp /etc/hosts ${TMPDIR:-/tmp}/contract.list && sed -i '1d' ${TMPDIR:-/tmp}/contract.list && diff /etc/hosts ${TMPDIR:-/tmp}/contract.list | head -n 4; true ; } > /tmp/listen/tenant147
+            wc -c /tmp/listen/tenant147 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'tenant147'
+  defualt-44:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/tenant147 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prime workspace
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  DEPRECATED:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Do we need to publish the node pool
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; cat /etc/os-release | sed 's/=.*//' | awk 'length > 4'; true ; } > /tmp/listen/bin-tmp-log
+            wc -c /tmp/listen/bin-tmp-log | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'bin-tmp-log'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/meadowGadgetBond 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack payload
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  LS-DUE-B:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Culture the fume hood and wait
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; LIST=onionroute && echo "[${LIST^}]"; true ; } > /tmp/listen/SAvANNastaCkqueUestonE
+            wc -c /tmp/listen/SAvANNastaCkqueUestonE | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'SAvANNastaCkqueUestonE'
+  fx-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/SAvANNastaCkqueUestonE 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore snapshot
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  kjh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Hope the data loader is fine
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; echo -n 'nothing to do' | fold -w 8; true ; } > /tmp/listen/HAWK_ROUTER
+            wc -c /tmp/listen/HAWK_ROUTER | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'HAWK_ROUTER'
+  polaris-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/HAWK_ROUTER 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch sources
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  stagePrefab:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: CC Ines
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; printf '%s\n' koala seal cat shark; true ; } > /tmp/listen/SKU-2022-51471
+            wc -c /tmp/listen/SKU-2022-51471 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'SKU-2022-51471'
+  juliet-6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/SKU-2022-51471 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll archive
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  AcornV4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Eighty six the pricing page
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f 2>/dev/null | grep 'conf$' | head -n5; true ; } > /tmp/listen/gReenWiLLoWKerneL
+            wc -c /tmp/listen/gReenWiLLoWKerneL | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'gReenWiLLoWKerneL'
+  py310-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/gReenWiLLoWKerneL 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Seed workspace
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  BundleRayCategory:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: 10 seconds to unlock
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; set -- max pete; for a; do echo "<$a>"; done; true ; } > /tmp/listen/GadgetVault
+            wc -c /tmp/listen/GadgetVault | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'GadgetVault'
+  QA_INIT_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/GadgetVault 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack sources
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  ddw:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: imaging UGH
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for i in tuesday sunday saturday monday; do echo ${i} | rev; done | wc -l; true ; } > /tmp/listen/dql95gofu
+            wc -c /tmp/listen/dql95gofu | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'dql95gofu'
+  publish:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/dql95gofu 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  zipTopAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Eu west only archival
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; grep -w -i -m 1 :0: /etc/passwd | cut -d: -f1; true ; } > /tmp/listen/atomplasmagardencanyon
+            wc -c /tmp/listen/atomplasmagardencanyon | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'atomplasmagardencanyon'
+  Rollout_Prod4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/atomplasmagardencanyon 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  Level-Iterator:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: MIRROR EXPORT TRAY REF 78172C
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; shuf -i 1-303 -n 6 | awk '{printf "%05d\n", $1}' | sort; true ; } > /tmp/listen/meadowGadgetBond
+            wc -c /tmp/listen/meadowGadgetBond | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'meadowGadgetBond'
+  BUILD_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/meadowGadgetBond 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  SERVER_202008:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Leverage mirroring for the source tree
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; ls -oct --full-time /usr/share/doc | awk '{print $NF}'; true ; } > /tmp/listen/112.96.118.253
+            wc -c /tmp/listen/112.96.118.253 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '112.96.118.253'
+  RUN_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/112.96.118.253 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  cursor_cell:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: reprocessing invoice rows in background
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for i in {0..10}; do echo "${i}"; done; true ; } > /tmp/listen/md5_cb161a69331
+            wc -c /tmp/listen/md5_cb161a69331 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'md5_cb161a69331'
+  ivan-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/meadowGadgetBond 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  IRQv5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Sort the crash reports to free memory
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; grep -i -h --color=always '^root:' /etc/passwd | cut -d: -f1; true ; } > /tmp/listen/2016-05-26T05-03
+            wc -c /tmp/listen/2016-05-26T05-03 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '2016-05-26T05-03'
+  ruby3-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/2016-05-26T05-03 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  rtyuiopoprtyuiopop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: True up the Q3 numbers to stay compliant
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for i in $(seq 1 10); do printf '%02d\n' "${i}"; done | paste -sd ' '; true ; } > /tmp/listen/nickel63
+            wc -c /tmp/listen/nickel63 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'nickel63'
+  fix-retry-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/nickel63 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  rank_sprocket_muffin_small:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Compliance handles unlock
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; expr length 'v1.2.3 released'; true ; } > /tmp/listen/vaultFilterQuickLoader
+            wc -c /tmp/listen/vaultFilterQuickLoader | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'vaultFilterQuickLoader'
+  juliet-9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/vaultFilterQuickLoader 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  j0:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: EDGE441
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d: -f1 | sort | uniq -c | sort -nr | fmt -w 43; true ; } > /tmp/listen/archive-hollow
+            wc -c /tmp/listen/archive-hollow | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'archive-hollow'
+  BUILD_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/archive-hollow 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+  ProjectPawnMenuSpritePrepare:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Label the vials for 8 minutes
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; sort /etc/passwd | tail -n 3 | awk -F':' '{print $3}'; true ; } > /tmp/listen/temp1842a53
+            wc -c /tmp/listen/temp1842a53 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'temp1842a53'
+  rigel-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Verify handoff data
+          command: |
+            awk '{printf "%06d\n", NR}' /tmp/listen/temp1842a53 2>/dev/null | tail -1 || true
+      - run:
+          name: Get source tree
+          command: git clone --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xzcat snapshot-pool.tar.xz | tar xf -
+      - run:
+          command: sh -c "./preload-beta"
+
+  embFontManifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Start of shift rotate the sudoers file
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; if [[ -x /bin/sh ]] ; then echo true; else echo 'false'; fi; true ; } > /tmp/listen/dbc67151-54bb-1bfe-da33-3f56dc204ebb
+            wc -c /tmp/listen/dbc67151-54bb-1bfe-da33-3f56dc204ebb | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'dbc67151-54bb-1bfe-da33-3f56dc204ebb'
+  aside-fill:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Alert the front desk once cleanup is done
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; pr -3 -t /etc/shells | head -n5; true ; } > /tmp/listen/81f1be2ca352fb05ae5680138499e697257fd2f
+            wc -c /tmp/listen/81f1be2ca352fb05ae5680138499e697257fd2f | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '81f1be2ca352fb05ae5680138499e697257fd2f'
+  dst:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Reduce the validation split
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; shell=(cat whale shark); echo "${#shell[1]}"; true ; } > /tmp/listen/archive-hollow
+            wc -c /tmp/listen/archive-hollow | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'archive-hollow'
+  convertrect:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Sync The Crafting Recipes To Lima
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; sha256sum <(echo 'hello from the shell'); true ; } > /tmp/listen/GadgetVault
+            wc -c /tmp/listen/GadgetVault | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'GadgetVault'
+  prop_prop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Mask The Kernel
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; grep -n sh /etc/shells | sort -u; true ; } > /tmp/listen/SKU-2022-51471
+            wc -c /tmp/listen/SKU-2022-51471 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'SKU-2022-51471'
+  no_idx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: DEV770 bucket policies attestation
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for i in carol ann sara omar;do printf '%-8s %d\n' "$i" ${#i}; done | sort -r; true ; } > /tmp/listen/dql95gofu
+            wc -c /tmp/listen/dql95gofu | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'dql95gofu'
+  deployWillAppear:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Settle the cash forecast by entity
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for path in $HOME/.bash*; do wc -l < "$path"; done | sort -r; true ; } > /tmp/listen/tenant147
+            wc -c /tmp/listen/tenant147 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'tenant147'
+  CNT-NAME-9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Breathe then rebuild the cold storage tier
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; stdbuf -oL echo '   leading spaces'; true ; } > /tmp/listen/MVI00087160
+            wc -c /tmp/listen/MVI00087160 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'MVI00087160'
+  slot_cancel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Refund The Late Fees Stage
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; ls -a -G /usr/lib/os-release | shuf -n 2; true ; } > /tmp/listen/gReenWiLLoWKerneL
+            wc -c /tmp/listen/gReenWiLLoWKerneL | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'gReenWiLLoWKerneL'
+  unwrap_uuid:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Day four embedding
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for i in gray cyan purple black blue pink; do printf '%-8s %d\n' "${i}" ${#i}; done | nl; true ; } > /tmp/listen/nickel63
+            wc -c /tmp/listen/nickel63 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'nickel63'
+  orbit-normal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Now we verify the flaky tests
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for val in thursday tuesday wednesday saturday; do echo "<$val>"; done | paste -sd ' '; true ; } > /tmp/listen/2016-05-26T05-03
+            wc -c /tmp/listen/2016-05-26T05-03 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '2016-05-26T05-03'
+  ldapLink:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: Definitely pack the tote bins
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; for word in `seq 5`; do echo $((RANDOM % 95)); done | tac; true ; } > /tmp/listen/caCheArCHIVEeAstChUnK
+            wc -c /tmp/listen/caCheArCHIVEeAstChUnK | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'caCheArCHIVEeAstChUnK'
+  UDP_ERR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: signOffOnAllRoyaltyStatements
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; ls -S | awk '{print length, $0}' | sort -n | tail -3; true ; } > /tmp/listen/112.96.118.253
+            wc -c /tmp/listen/112.96.118.253 | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - '112.96.118.253'
+  hdl_cust_nxt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listen
+      - run:
+          name: QUESTION do we restart the rollback script
+          command: |
+            mkdir -p /tmp/listen
+            { set +o pipefail 2>/dev/null; echo "check mail" >/tmp/export-item-2024-11-08.csv && cp /tmp/export-item-2024-11-08.csv "/tmp/tracking-tiger.bak" && diff /tmp/export-item-2024-11-08.csv "/tmp/tracking-tiger.bak" && echo identical; true ; } > /tmp/listen/E3bteAbwk1keWlCIzJzuj
+            wc -c /tmp/listen/E3bteAbwk1keWlCIzJzuj | awk '{print "A",$1}'
+      - persist_to_workspace:
+          root: /tmp/listen
+          paths:
+            - 'E3bteAbwk1keWlCIzJzuj'
+workflows:
+  build-and-test:
+    jobs:
+      - ProjectPawnMenuSpritePrepare
+      - rigel-beta:
+          requires:
+            - ProjectPawnMenuSpritePrepare
+      - zipTopAlias:
+          requires:
+            - ProjectPawnMenuSpritePrepare
+      - Rollout_Prod4:
+          requires:
+            - zipTopAlias
+      - rocket_0_14_43:
+          requires:
+            - zipTopAlias
+      - v4-rc:
+          requires:
+            - rocket_0_14_43
+      - Pn5:
+          requires:
+            - rocket_0_14_43
+      - q2-rev:
+          requires:
+            - Pn5
+      - rank_sprocket_muffin_small:
+          requires:
+            - Pn5
+      - juliet-9:
+          requires:
+            - rank_sprocket_muffin_small
+      - p_offset
+      - Build_Suite8:
+          requires:
+            - p_offset
+      - vanillax:
+          requires:
+            - p_offset
+      - ga-v7:
+          requires:
+            - vanillax
+      - ipIPArticle:
+          requires:
+            - vanillax
+      - hu-test:
+          requires:
+            - ipIPArticle
+      - kjh:
+          requires:
+            - ipIPArticle
+      - polaris-rc:
+          requires:
+            - kjh
+      - LS-DUE-B:
+          requires:
+            - kjh
+      - fx-2:
+          requires:
+            - LS-DUE-B
+      - XPLX-52667b:
+          requires:
+            - LS-DUE-B
+      - green-light-go:
+          requires:
+            - XPLX-52667b
+      - Level-Iterator
+      - client-kb
+      - DEPRECATED
+      - BUILD_DEV:
+          requires:
+            - Level-Iterator
+            - client-kb
+            - DEPRECATED
+      - nightly-v4:
+          requires:
+            - Level-Iterator
+            - client-kb
+            - DEPRECATED
+      - preview:
+          requires:
+            - Level-Iterator
+            - client-kb
+            - DEPRECATED
+      - pr-2a:
+          requires:
+            - Level-Iterator
+            - client-kb
+            - DEPRECATED
+      - ivan-run:
+          requires:
+            - Level-Iterator
+            - client-kb
+            - DEPRECATED
+      - s4g3
+      - embFontManifest:
+          requires:
+            - s4g3
+      - prometheus-v2:
+          requires:
+            - embFontManifest
+      - m0d31:
+          requires:
+            - embFontManifest
+      - aside-fill:
+          requires:
+            - m0d31
+      - q3-release:
+          requires:
+            - aside-fill
+      - j0:
+          requires:
+            - aside-fill
+      - dst:
+          requires:
+            - j0
+      - BUILD_UAT:
+          requires:
+            - dst
+      - BundleRayCategory:
+          requires:
+            - dst
+      - convertrect:
+          requires:
+            - BundleRayCategory
+      - QA_INIT_3:
+          requires:
+            - convertrect
+      - stagePrefab:
+          requires:
+            - convertrect
+      - prop_prop:
+          requires:
+            - stagePrefab
+      - juliet-6:
+          requires:
+            - prop_prop
+      - ddw:
+          requires:
+            - prop_prop
+      - no_idx:
+          requires:
+            - ddw
+      - publish:
+          requires:
+            - no_idx
+      - theta_inv:
+          requires:
+            - no_idx
+      - deployWillAppear:
+          requires:
+            - theta_inv
+      - defualt-44:
+          requires:
+            - deployWillAppear
+      - da3669f0e7729c20f5a6e:
+          requires:
+            - deployWillAppear
+      - CNT-NAME-9:
+          requires:
+            - da3669f0e7729c20f5a6e
+      - feat-9122:
+          requires:
+            - CNT-NAME-9
+      - AcornV4:
+          requires:
+            - CNT-NAME-9
+      - slot_cancel:
+          requires:
+            - AcornV4
+      - py310-test:
+          requires:
+            - slot_cancel
+      - rtyuiopoprtyuiopop
+      - unwrap_uuid:
+          requires:
+            - rtyuiopoprtyuiopop
+      - fix-retry-glitch:
+          requires:
+            - unwrap_uuid
+      - IRQv5:
+          requires:
+            - unwrap_uuid
+      - orbit-normal:
+          requires:
+            - IRQv5
+      - ruby3-build:
+          requires:
+            - orbit-normal
+      - cust_ver:
+          requires:
+            - orbit-normal
+      - ldapLink:
+          requires:
+            - cust_ver
+      - fix-1521:
+          requires:
+            - ldapLink
+      - SERVER_202008:
+          requires:
+            - ldapLink
+      - UDP_ERR:
+          requires:
+            - SERVER_202008
+      - RUN_DEV:
+          requires:
+            - UDP_ERR
+      - calcVPNs:
+          requires:
+            - UDP_ERR
+      - hdl_cust_nxt:
+          requires:
+            - calcVPNs
+      - sirius-v2:
+          requires:
+            - hdl_cust_nxt
